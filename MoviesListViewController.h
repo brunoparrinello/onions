@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MoviesListViewController.h
 //  onions
 //
 //  Created by Bruno Parrinello on 1/7/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MoviesListViewController : UITableViewController
 
 @end
