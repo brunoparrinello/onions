@@ -10,10 +10,6 @@
 
 @interface MovieCell ()
 
-@property (nonatomic, weak) IBOutlet UIImageView *posterImageView;
-@property (nonatomic, weak) IBOutlet UILabel *movieTitleLabel;
-@property (nonatomic, weak) IBOutlet UILabel *movieSummaryLabel;
-@property (nonatomic, weak) IBOutlet UILabel *movieCastLabel;
 
 
 @end
@@ -24,7 +20,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }

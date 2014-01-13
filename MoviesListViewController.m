@@ -7,11 +7,11 @@
 //
 
 #import "MoviesListViewController.h"
+#import "MovieCell.h"
 
 @interface MoviesListViewController ()
 
 @property (nonatomic, strong) NSArray *movies;
-
 @end
 
 @implementation MoviesListViewController
@@ -66,14 +66,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.movies count];
 }
@@ -81,13 +79,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"MovieCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *movie = [self.movies objectAtIndex:indexPath.row];
-    NSMutableArray *actors = [NSMutableArray array];
-    NSArray *cast = [movie objectForKey:@"abridged_cast"];
+    NSDictionary *posters = [movie objectForKey:@"posters"];
     
-    cell.textLabel.text = [movie objectForKey:@"title"];
+    //NSMutableArray *actors = [NSMutableArray array];
+    NSArray *cast = [movie objectForKey:@"abridged_cast"];
+    NSMutableString *movieCastString = [[NSMutableString alloc] init];
+    [movieCastString appendString:@"Cast: "];
+    for (int i=0; i<3; i++) {
+        [movieCastString appendString:[[cast objectAtIndex:i] objectForKey:@"name"]];
+        [movieCastString appendString:@", "];
+        //actors[i] = [[cast objectAtIndex:i] objectForKey:@"name"];
+    }
+    movieCastString = (NSMutableString *) [movieCastString substringToIndex:[movieCastString length] -2];
+    
+    
+    //cell.posterImageView = [posters objectForKey:@"thumbnail"];
+    cell.movieTitleLabel.text = [movie objectForKey:@"title"];
+    cell.movieSummaryLabel.text = [movie objectForKey:@"synopsis"];
+    cell.movieCastLabel.text = movieCastString;
+    
+    NSLog(@"%@", movieCastString);
     
     return cell;
 }
